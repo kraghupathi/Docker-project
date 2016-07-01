@@ -1,0 +1,1969 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2016-07-01 Fri 10:22 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="viewport" content="width=device-width, initial-scale=1" />
+<title>Docker 1.11.2</title>
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Meghana Bandaru" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">Docker 1.11.2</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgheadline1">1. Introduction</a></li>
+<li><a href="#orgheadline2">2. Motivation</a></li>
+<li><a href="#orgheadline3">3. Introduction to Docker</a></li>
+<li><a href="#orgheadline4">4. Benefits of Docker</a></li>
+<li><a href="#orgheadline5">5. Docker Architecture</a></li>
+<li><a href="#orgheadline22">6. Getting started with Docker</a>
+<ul>
+<li><a href="#orgheadline8">6.1. Docker images and containers</a>
+<ul>
+<li><a href="#orgheadline6">6.1.1. How does Docker images work?</a></li>
+<li><a href="#orgheadline7">6.1.2. How does Docker containers work?</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline9">6.2. How to Install docker on Ubuntu 14.04</a></li>
+<li><a href="#orgheadline10">6.3. Launch your first container</a></li>
+<li><a href="#orgheadline11">6.4. Create/Start/Stop/Restart/Destroy your container</a></li>
+<li><a href="#orgheadline12">6.5. Naming a container</a></li>
+<li><a href="#orgheadline13">6.6. Giving a hostname to container</a></li>
+<li><a href="#orgheadline14">6.7. List containers</a></li>
+<li><a href="#orgheadline15">6.8. List images</a></li>
+<li><a href="#orgheadline16">6.9. List processes running inside a container</a></li>
+<li><a href="#orgheadline17">6.10. Running your container in detached mode</a></li>
+<li><a href="#orgheadline18">6.11. Execute a command inside a container from host machine</a></li>
+<li><a href="#orgheadline19">6.12. Get inside a container</a></li>
+<li><a href="#orgheadline20">6.13. Auto restart Containers</a></li>
+<li><a href="#orgheadline21">6.14. Resource allocation options for Docker containers</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline39">7. Advanced operations in Docker</a>
+<ul>
+<li><a href="#orgheadline23">7.1. Create an image from your container</a></li>
+<li><a href="#orgheadline25">7.2. Dockerfile</a>
+<ul>
+<li><a href="#orgheadline24">7.2.1. Some more info on Dockerfile</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline27">7.3. Run a container as a server</a>
+<ul>
+<li><a href="#orgheadline26">7.3.1. Steps to set up a container as a server</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline28">7.4. To view the Docker containers resource usage statistics</a></li>
+<li><a href="#orgheadline35">7.5. Docker Data Volumes</a>
+<ul>
+<li><a href="#orgheadline29">7.5.1. Create Volume</a></li>
+<li><a href="#orgheadline30">7.5.2. Mount Host Directory</a></li>
+<li><a href="#orgheadline31">7.5.3. Inspect</a></li>
+<li><a href="#orgheadline32">7.5.4. Delete Volume</a></li>
+<li><a href="#orgheadline33">7.5.5. List Volumes</a></li>
+<li><a href="#orgheadline34">7.5.6. Note:</a></li>
+</ul>
+</li>
+<li><a href="#orgheadline38">7.6. Taking backup of Docker Containers and images</a>
+<ul>
+<li><a href="#orgheadline36">7.6.1. Backup Docker Images</a></li>
+<li><a href="#orgheadline37">7.6.2. Backup Docker Containers</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline46">8. Docker Hub</a>
+<ul>
+<li><a href="#orgheadline40">8.1. what is a Docker hub?</a></li>
+<li><a href="#orgheadline45">8.2. How to use Docker hub?</a>
+<ul>
+<li><a href="#orgheadline41">8.2.1. Account creation and login</a></li>
+<li><a href="#orgheadline42">8.2.2. Search for images</a></li>
+<li><a href="#orgheadline43">8.2.3. Pull images</a></li>
+<li><a href="#orgheadline44">8.2.4. Push images</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline52">9. Performance Testing</a>
+<ul>
+<li><a href="#orgheadline47">9.1. Test using curl command and crontab</a></li>
+<li><a href="#orgheadline48">9.2. Test using siege and sar commands</a></li>
+<li><a href="#orgheadline51">9.3. Test using Fork bomb</a>
+<ul>
+<li><a href="#orgheadline49">9.3.1. Testing Docker Container without limiting its memory</a></li>
+<li><a href="#orgheadline50">9.3.2. Testing Docker container after limiting its memory</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#orgheadline53">10. Conclusion</a></li>
+<li><a href="#orgheadline54">11. Reference</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline1" class="outline-2">
+<h2 id="orgheadline1"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This document aims at detailing the Docker with everything tested and confirmed.
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline2" class="outline-2">
+<h2 id="orgheadline2"><span class="section-number-2">2</span> Motivation</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+To get indepth knowledge of Docker along with all its features so that
+we can shift VLEAD's current architecture of hosting labs in Virtual Machines to
+Docker Containers 
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline3" class="outline-2">
+<h2 id="orgheadline3"><span class="section-number-2">3</span> Introduction to Docker</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Docker is an open-source technology that that allows you to build, run, test,
+and deploy distributed applications inside software containers. It allows you
+to package a piece of software in a standardized unit for software development,
+containing everything the software needs to run: code, runtime, system tools,
+system libraries, etc. Docker enables you to quickly, reliably, and
+consistently deploy applications regardless of environment.
+You can refer it <a href="https://www.docker.com/what-docker#/copy1">here.</a>  
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline4" class="outline-2">
+<h2 id="orgheadline4"><span class="section-number-2">4</span> Benefits of Docker</h2>
+<div class="outline-text-2" id="text-4">
+<dl class="org-dl">
+<dt>Rapid application deployment</dt><dd>Containers include the minimal runtime requirements of the application,
+reducing their size and allowing them to be deployed quickly.</dd>
+
+<dt>Portability across machines</dt><dd>An application and all its dependencies can be bundled into a single
+container that is independent from the host version of Linux kernel,
+platform distribution, or deployment model. This container can be
+transferred to another machine that runs Docker, and executed there
+without compatibility issues.</dd>
+
+<dt>Version control</dt><dd>You can track successive versions of a container, inspect differences, or roll-back to previous
+versions. That means your container can be easily rolled back when required.</dd>
+
+<dt>Sharing</dt><dd>You can use a remote repository to share your container with others.</dd>
+
+<dt>Lightweight and minimal overhead</dt><dd>Docker images are typically very small, which facilitates rapid delivery
+and reduces the time to deploy new application containers.</dd>
+
+<dt>Simplified maintenance</dt><dd>Docker reduces effort and risk of problems with application dependencies.</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgheadline5" class="outline-2">
+<h2 id="orgheadline5"><span class="section-number-2">5</span> Docker Architecture</h2>
+<div class="outline-text-2" id="text-5">
+<ul class="org-ul">
+<li>Docker uses a client-server architecture</li>
+<li><p>
+The Docker client talks to the Docker daemon, which does the heavy lifting
+of building, running, and distributing your Docker containers
+</p>
+
+
+<div class="figure">
+<p><img src="./images/architecture.png" alt="architecture.png" />
+</p>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline22" class="outline-2">
+<h2 id="orgheadline22"><span class="section-number-2">6</span> Getting started with Docker</h2>
+<div class="outline-text-2" id="text-6">
+</div><div id="outline-container-orgheadline8" class="outline-3">
+<h3 id="orgheadline8"><span class="section-number-3">6.1</span> Docker images and containers</h3>
+<div class="outline-text-3" id="text-6-1">
+<dl class="org-dl">
+<dt>Docker Image</dt><dd><ul class="org-ul">
+<li>A Docker image is a read-only template.</li>
+<li>For example, an image could contain an Ubuntu operating system with Apache
+and your web application installed.</li>
+<li>Images are used to create Docker containers.</li>
+<li>Docker images are the build component of Docker.</li>
+</ul></dd>
+<dt>Docker Container</dt><dd><ul class="org-ul">
+<li>A container is a runtime instance of a docker image.</li>
+<li>Each container is launched from a Docker image.</li>
+<li>Docker containers can be run, started, stopped, moved, and deleted.</li>
+<li>Docker containers are the run component of Docker.</li>
+<li>To use a programming metaphor, if an image is a class, then acontainer is
+an instance of a class(a runtime object).</li>
+</ul></dd>
+</dl>
+</div>
+<div id="outline-container-orgheadline6" class="outline-4">
+<h4 id="orgheadline6"><span class="section-number-4">6.1.1</span> How does Docker images work?</h4>
+<div class="outline-text-4" id="text-6-1-1">
+<ul class="org-ul">
+<li>Each image consists of a series of layers.</li>
+<li>Docker makes use of union file systems to combine these layers into a
+single image.One of the reasons Docker is so lightweight is because of these
+layers.</li>
+<li>When you change a Docker image-for example, update an application to a new
+version, a new layer gets built.</li>
+<li>Thus, rather than replacing the whole image or entirely rebuilding, only
+that layer is added or updated.</li>
+<li>Now you don't need to distribute a whole new image, just the update,
+making distributing Docker images faster and simpler.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline7" class="outline-4">
+<h4 id="orgheadline7"><span class="section-number-4">6.1.2</span> How does Docker containers work?</h4>
+<div class="outline-text-4" id="text-6-1-2">
+<ul class="org-ul">
+<li>A container consists of an operating system, user-added files and
+meta-data.</li>
+<li>The image which we used to create the container tells Docker what that container
+holds, what process to run when the container is launched, and a variety
+of other configuration data.</li>
+<li>The Docker image is read-only. When Docker runs a container from an image, it
+adds a read-write layer on top of the image in which your application can then run.</li>
+</ul>
+
+
+<div class="figure">
+<p><img src="./images/docker-layer.jpg" alt="docker-layer.jpg" />
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline9" class="outline-3">
+<h3 id="orgheadline9"><span class="section-number-3">6.2</span> How to Install docker on Ubuntu 14.04</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+Installation Instructions on Ubuntu:
+</p>
+<dl class="org-dl">
+<dt>Update your droplet</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ sudo apt-get update
+$ sudo apt-get -y upgrade
+</pre>
+</div></dd>
+<dt>Make sure aufs support is available</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ sudo apt-get install linux-image-extra-`uname -r`
+</pre>
+</div></dd>
+<dt>Add docker repository key to apt-key for package verification</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ sudo apt-key adv --keyserver hkp://pgp.mit.edu:80 --recv-keys 58118E89F3A912897C070ADBF76221572C52609D
+</pre>
+</div></dd>
+<dt>Add the docker repository to Apt sources</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ echo "deb https://apt.dockerproject.org/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
+</pre>
+</div></dd>
+<dt>Update the repository with the new addition</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ sudo apt-get update
+</pre>
+</div></dd>
+<dt>Finally, download and install docker</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ sudo apt-get install docker-engine
+</pre>
+</div></dd>
+<dt>Check if docker is installed</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker version
+</pre>
+</div>
+<p>
+If you get the following output, then Docker is successfully installed
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">Client:
+Version:      1.11.2
+API version:  1.23
+Go version:   go1.5.4
+Git commit:   b9f10c9
+Built:        Wed Jun  1 21:47:50 2016
+OS/Arch:      linux/amd64
+
+Server:
+Version:      1.11.2
+API version:  1.23
+Go version:   go1.5.4
+Git commit:   b9f10c9
+Built:        Wed Jun  1 21:47:50 2016
+OS/Arch:      linux/amd64
+</pre>
+</div></dd>
+</dl>
+</div>
+</div>
+
+<div id="outline-container-orgheadline10" class="outline-3">
+<h3 id="orgheadline10"><span class="section-number-3">6.3</span> Launch your first container</h3>
+<div class="outline-text-3" id="text-6-3">
+<p>
+Launch or execute a command in container using <code>docker run</code> command. This
+command will launch a container from an image, execute your command 
+display output on terminal, stop container and  exit out.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-command">docker run--&gt;create container-&gt;run-container--&gt;execute command--&gt;show
+output--&gt;exit from container--&gt;stop container
+</pre>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-command">$ sudo docker run [options] [image] [command] [args]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ sudo docker run ubuntu:14.04 echo "Hello Docker"
+$ Hello Docker
+</pre>
+</div>
+<p>
+If the ubuntu:14.04 image is not present locally it will download it, will
+create a container and then will execute the command <code>echo</code>. After this it
+will exit the container and the container is stopped.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgheadline11" class="outline-3">
+<h3 id="orgheadline11"><span class="section-number-3">6.4</span> Create/Start/Stop/Restart/Destroy your container</h3>
+<div class="outline-text-3" id="text-6-4">
+<p>
+A container is a runtime instance of a docker image.
+</p>
+<dl class="org-dl">
+<dt>Create a new container</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker create [OPTIONS] IMAGE [COMMAND] [ARG...]
+</pre>
+</div>
+<p>
+For example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker create -it ubuntu:14.04 echo "Hello World"
+</pre>
+</div>
+<ul class="org-ul">
+<li><code>docker create</code> command can be used to set up a container configuration ahead of time so
+that it is ready to start when you need it.</li>
+<li>Creates a writeable container layer over the specified image.</li>
+<li>A container created does not start on it's own and is to be started.</li>
+</ul></dd>
+<dt>Start a container</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker start [OPTIONS] CONTAINER [CONTAINER...]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker start e76ccff0a41a
+e76ccff0a41a
+</pre>
+</div></dd>
+<dt>To stop one or more containers</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker stop [OPTIONS] CONTAINER [CONTAINER...]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker stop e76ccff0a41a
+e76ccff0a41a
+</pre>
+</div></dd>
+</dl>
+<dl class="org-dl">
+<dt>To restart one or more container</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker restart [OPTIONS] CONTAINER [CONTAINER...]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker restart e76ccff0a41a
+e76ccff0a41a
+</pre>
+</div>
+<dl class="org-dl">
+<dt>Destroy a container</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker rm [OPTIONS] CONTAINER [CONTAINER...]
+</pre>
+</div>
+<ul class="org-ul">
+<li>You can destroy one or more containers at a time</li>
+<li>You cannot delete a container which is currently running. So first stop the
+container and then delete it.</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker stop e76ccff0a41a
+e76ccff0a41a
+$ docker rm e76ccff0a41a
+e76ccff0a41a
+</pre>
+</div></dd>
+</dl></dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgheadline12" class="outline-3">
+<h3 id="orgheadline12"><span class="section-number-3">6.5</span> Naming a container</h3>
+<div class="outline-text-3" id="text-6-5">
+<ul class="org-ul">
+<li>If you do not specify the name of the container docker will automatically
+assume any random name.</li>
+<li><p>
+To give name to a container:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run [options] -name &lt;name of container&gt; &lt;image&gt; &lt;command&gt;
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -it -name lab1_cse01 ubuntu:14.04 bash
+root@8c2fc6ba883b:~#
+</pre>
+</div></li>
+<li><p>
+You can always rename your container
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker rename [OPTIONS] OLD_NAME NEW_NAME
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker rename lab1_cae01 lab2_cse02
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline13" class="outline-3">
+<h3 id="orgheadline13"><span class="section-number-3">6.6</span> Giving a hostname to container</h3>
+<div class="outline-text-3" id="text-6-6">
+<ul class="org-ul">
+<li><p>
+To give host name to container you must use <code>-h</code> flag with the <code>docker run</code> command:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -h &lt;hostname&gt; [options] [image] [command]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -h new_ctnd -it ubuntu:14.04 bash
+root@new_cntd:~#
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline14" class="outline-3">
+<h3 id="orgheadline14"><span class="section-number-3">6.7</span> List containers</h3>
+<div class="outline-text-3" id="text-6-7">
+<p>
+<code>docker ps</code> command is used to list containers in host machine. Depending on
+the flags provided, it displays information of stopped or running containers.  
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker ps [options]
+</pre>
+</div>
+
+<dl class="org-dl">
+<dt>List the containers which are currently running</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker ps
+CONTAINER ID    IMAGE          COMMAND    CREATED              STATUS              PORTS           NAMES
+07c5614d5a40    ubuntu:14.04   "bash"     About a minute ago   Up About a minute                   evil_fermi
+e76ccff0a41a    ubuntu:14.04   "bash"     4 days ago           Up 12 minutes                       stoic_bhabha
+</pre>
+</div></dd>
+
+<dt>List all the containers(both running and stopped)</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker ps -a
+CONTAINER ID        IMAGE                    COMMAND             CREATED             STATUS                    PORTS               NAMES
+07c5614d5a40        ubuntu:14.04             "bash"              5 minutes ago       Up 5 minutes                                  evil_fermi
+e76ccff0a41a        ubuntu:14.04             "bash"              4 days ago          Up 15 minutes                                 stoic_bhabha
+ca251b8c44d8        ubuntu:14.04             "bash"              4 days ago          Exited (0) 4 days ago                         sad_wright
+58d28030aa5e        ubuntu:14.04             "bash"              4 days ago          Exited (0) 4 days ago                         jolly_raman
+34ab6efd089f        lab/problem-solving:01   "bash"              5 days ago          Exited (0) 4 days ago                         insane_yalow
+4164528c53c3        ubuntu:14.04             "bash"              5 days ago          Exited (0) 4 days ago                         pensive_hypatia
+ec164228902a        ubuntu:14.04             "bash"              5 days ago          Exited (0) 21 hours ago                       tiny_aryabhata
+8c2fc6ba883b        ubuntu:14.04             "bash"              5 days ago          Exited (0) 30 hours ago                       new-name
+</pre>
+</div>
+<p>
+OR
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker ps -as
+CONTAINER ID        IMAGE                    COMMAND             CREATED             STATUS                    PORTS               NAMES               SIZE
+07c5614d5a40        ubuntu:14.04             "bash"              6 minutes ago       Up 6 minutes                                  evil_fermi          0 B (virtual 188 MB)
+e76ccff0a41a        ubuntu:14.04             "bash"              4 days ago          Up 17 minutes                                 stoic_bhabha        164 B (virtual 188 MB)
+ca251b8c44d8        ubuntu:14.04             "bash"              4 days ago          Exited (0) 4 days ago                         sad_wright          203.8 kB (virtual 188.2 MB)
+58d28030aa5e        ubuntu:14.04             "bash"              4 days ago          Exited (0) 4 days ago                         jolly_raman         63.87 MB (virtual 251.8 MB)
+34ab6efd089f        lab/problem-solving:01   "bash"              5 days ago          Exited (0) 4 days ago                         insane_yalow        1.385 MB (virtual 788.7 MB)
+4164528c53c3        ubuntu:14.04             "bash"              5 days ago          Exited (0) 4 days ago                         pensive_hypatia     153.1 MB (virtual 341.1 MB)
+ec164228902a        ubuntu:14.04             "bash"              5 days ago          Exited (0) 21 hours ago                       tiny_aryabhata      1.25 GB (virtual 1.438 GB)
+8c2fc6ba883b        ubuntu:14.04             "bash"              5 days ago          Exited (0) 30 hours ago                       new-name            0 B (virtual 188 MB)
+</pre>
+</div>
+<ul class="org-ul">
+<li>flag <code>a</code> to view all containers</li>
+<li>flag <code>s</code> to view size of containers</li>
+</ul></dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgheadline15" class="outline-3">
+<h3 id="orgheadline15"><span class="section-number-3">6.8</span> List images</h3>
+<div class="outline-text-3" id="text-6-8">
+<p>
+List all the images currently sitting in your local repository/system
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+labs/speech-recog     latest              1e85be4efa89        5 days ago          341.1 MB
+lab/problem-solving   01                  be7d953b67e6        5 days ago          787.3 MB
+meghanab/myapp        1.0                 08570d8b4a10        13 days ago         267.3 MB
+meghana/new_image1    0.1                 2934249749c9        2 weeks ago         252.9 MB
+meghana/new_user      1                   b5900443b2d7        2 weeks ago         188.3 MB
+centos                7                   904d6c400333        3 weeks ago         196.8 MB
+ubuntu                14.04               8f1bd21bd25c        4 weeks ago         188 MB
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline16" class="outline-3">
+<h3 id="orgheadline16"><span class="section-number-3">6.9</span> List processes running inside a container</h3>
+<div class="outline-text-3" id="text-6-9">
+<dl class="org-dl">
+<dt>Display the running processes of a container</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker top [container]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker top ec164228902a
+UID            PID             PPID           C              STIME           TTY            TIME             CMD
+root           5207            5192           0              20:32           pts/9          00:00:00         bash
+</pre>
+</div></dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgheadline17" class="outline-3">
+<h3 id="orgheadline17"><span class="section-number-3">6.10</span> Running your container in detached mode</h3>
+<div class="outline-text-3" id="text-6-10">
+<ul class="org-ul">
+<li><p>
+To run a container in the background as soon as it is created you have to
+specify <code>-d</code> flag along with the <code>docker run</code> command
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -d [image] [command]
+</pre>
+</div>
+<ul class="org-ul">
+<li>This will run the command in the background and will automatically shuts down
+the container after its execution</li>
+</ul>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -d ubuntu:14.04 bash
+698de53f5f4b151122e18b51d4abb813b4e1dff10e30472791dd5ec336fb4b10
+$
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline18" class="outline-3">
+<h3 id="orgheadline18"><span class="section-number-3">6.11</span> Execute a command inside a container from host machine</h3>
+<div class="outline-text-3" id="text-6-11">
+<ul class="org-ul">
+<li><p>
+You can execute a command inside a container from the host machine
+provided the container is in running state. Otherwise you have to start
+the container first and then use the following command
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+</pre>
+</div>
+<p>
+For example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">root@meghana / $ docker ps
+CONTAINER ID   IMAGE          COMMAND      CREATED        STATUS              PORTS               NAMES
+e76ccff0a41a   ubuntu:14.04   "bash"       2 days ago     Up About an hour                        stoic_bhabha
+
+root@meghana / $ docker exec e76ccff0a41a ping 127.0.0.1 -c 5
+PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.
+64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.050 ms
+64 bytes from 127.0.0.1: icmp_seq=2 ttl=64 time=0.053 ms
+64 bytes from 127.0.0.1: icmp_seq=3 ttl=64 time=0.055 ms
+64 bytes from 127.0.0.1: icmp_seq=4 ttl=64 time=0.033 ms
+64 bytes from 127.0.0.1: icmp_seq=5 ttl=64 time=0.054 ms
+
+--- 127.0.0.1 ping statistics ---
+5 packets transmitted, 5 received, 0% packet loss, time 3997ms
+rtt min/avg/max/mdev = 0.033/0.049/0.055/0.008 ms
+</pre>
+</div>
+<ul class="org-ul">
+<li>You can use various flags with this command</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-command">  -d                Detached mode: run command in the background
+  -i                Keep STDIN open even if not attached
+  -t                Allocate a pseudo Terminal
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline19" class="outline-3">
+<h3 id="orgheadline19"><span class="section-number-3">6.12</span> Get inside a container</h3>
+<div class="outline-text-3" id="text-6-12">
+<p>
+To get terminal access to container you need to fire some commands. This may be
+required to install packages and configure them inside your container.
+</p>
+<dl class="org-dl">
+<dt>Case 1</dt><dd><p>
+   If you want to enter into a container as soon as you create it:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -it &lt;repository&gt;:&lt;tag&gt; bash
+</pre>
+</div>
+<ul class="org-ul">
+<li><code>-i</code> flag to connect STDIN on the container</li>
+<li><code>-t</code> flag to get a pseudo terminal</li>
+</ul>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -it ubuntua:14.04 bash
+root@ec164228902a:~#
+</pre>
+</div></dd>
+
+<dt>Case 2</dt><dd>If you fire <code>bash</code> command inside a container, it runs forever, until
+manually stopped. By giving <code>-d</code> flag to <code>docker run</code>  a container executes
+and runs in detached mode, with no interaction with user. So to get inside a
+container which is running in detached mode:
+<dl class="org-dl">
+<dt>Method 1</dt><dd><ul class="org-ul">
+<li>Using exec command</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-comand">$ docker exec -it &lt;Container ID&gt; bash
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker exec -it ec164228902a bash
+root@ec164228902a:~#
+</pre>
+</div>
+<dl class="org-dl">
+<dt>To come out of the container without stopping it</dt><dd></dd>
+</dl>
+<div class="org-src-container">
+
+<pre class="src src-command">CTRL+P CTRL+Q
+</pre>
+</div>
+<p>
+OR
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command"># exit
+</pre>
+</div>
+<p>
+For example you are inside the container <code>ec164228902a</code>:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">root@ec164228902a:~# exit
+root@meghana ~ $
+root@meghana ~ $ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+07c5614d5a40        ubuntu:14.04        "bash"              21 minutes ago      Up 21 minutes                           evil_fermi
+ec164228902a        ubuntu:14.04        "bash"              4 days ago          Up 32 minutes                           stoic_bhabha
+</pre>
+</div></dd>
+<dt>Method 2</dt><dd><ul class="org-ul">
+<li>Using Attach command</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker attach &lt;Container ID&gt;
+</pre>
+</div>
+<ul class="org-ul">
+<li>You might need to hit Enter to bring up the prompt.</li>
+</ul>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker attach ec164228902
+$
+root@ec164228902:~#
+</pre>
+</div>
+<dl class="org-dl">
+<dt>To come out of the container without stopping it</dt><dd></dd>
+</dl>
+<div class="org-src-container">
+
+<pre class="src src-command">CTRL+P+Q
+</pre>
+</div></dd>
+</dl></dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgheadline20" class="outline-3">
+<h3 id="orgheadline20"><span class="section-number-3">6.13</span> Auto restart Containers</h3>
+<div class="outline-text-3" id="text-6-13">
+<p>
+If your host machine shuts down, all container will be stopped. Once your
+restart your machine, all container should automatically start. To add such
+behavior to all your containers, you need to add a flag <code>--restart</code> in
+<code>docker run</code> command. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run [options] --restart=always [image] [command]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -d -it --restart=always meghanab/app1:0.1 bash
+</pre>
+</div>
+<ul class="org-ul">
+<li>We need to specify whether you want to auto-start your container at the
+time of its creation itself.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline21" class="outline-3">
+<h3 id="orgheadline21"><span class="section-number-3">6.14</span> Resource allocation options for Docker containers</h3>
+<div class="outline-text-3" id="text-6-14">
+<ul class="org-ul">
+<li><p>
+Using the <code>-m</code> flag with <code>docker run</code> command we can limit the memory(RAM)
+usage of the containers
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -m [] [options] [image] [command]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -d -it -m 300M ubuntu:14.04 bash
+WARNING: Your kernel does not support swap limit capabilities, memory limited without swap.
+b172827cb899f36e35e0fa587e6f30793f0ed37befe76a1e77b2f9cacc8c905a
+$  docker stats --no-stream=true
+CONTAINER           CPU %               MEM USAGE / LIMIT       MEM %               NET I/O             BLOCK I/O           PIDS
+b172827cb899        0.00%               712.7 kB / =314.6 MB=   0.23%               4.064 kB / 648 B    114.7 kB / 0 B      0
+ec164228902a        0.00%               4.375 MB / 4.064 GB     0.11%               12.37 kB / 648 B    4.071 MB / 0 B      0
+</pre>
+</div>
+<ul class="org-ul">
+<li>Thus here we are able to limit the RAM to 300MB</li>
+<li>While for the other container it is 4GB as we didn't mention anything during
+its creation, so it takes 4GB(host system RAM) by default.</li>
+<li>Here the <code>-d</code> flag lets the container run in detached mode</li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline39" class="outline-2">
+<h2 id="orgheadline39"><span class="section-number-2">7</span> Advanced operations in Docker</h2>
+<div class="outline-text-2" id="text-7">
+</div><div id="outline-container-orgheadline23" class="outline-3">
+<h3 id="orgheadline23"><span class="section-number-3">7.1</span> Create an image from your container</h3>
+<div class="outline-text-3" id="text-7-1">
+<p>
+One can commit a container and can create its image. Thus we can save the state
+a container. This image can be used to launch new container with all the
+packages installed hence replicating the state of the container. This helps
+in creating a reusable image for launching multiple containers with
+customized applications of your need. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker commit &lt;container ID&gt; &lt;Repository&gt;:&lt;tag&gt;
+#For Example:
+$ docker commit ec164228902 meghanab/myapp:1.0
+sha256:4069d3511b08f810c6b725f64360f10148a46a8e5f66a111304585e33af1e912
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline25" class="outline-3">
+<h3 id="orgheadline25"><span class="section-number-3">7.2</span> Dockerfile</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+Dockerfiles are scripts containing a successive series of instructions,
+directions, and commands which are to be executed to form a new docker
+image. Each command executed translates to a new layer forming the end
+product. They basically replace the process of doing everything manually and
+repeatedly. When a Dockerfile is finished executing, you end up
+</p>
+
+<p>
+having formed an image, which then you use to start (i.e. create) a new
+container.It is more effective and easier way compared to <code>docker commit</code>
+</p>
+<dl class="org-dl">
+<dt>Writing Dockerfile</dt><dd><ul class="org-ul">
+<li>Docker file instructions:</li>
+<li><code>FROM</code>: for specifying the base image</li>
+<li><code>RUN</code>: for specifying commands to execute</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-command">$ vim Dockerfile 
+#Example of a Docker File
+FROM ubuntu:14.04
+RUN apt-get install -y  vim
+RUN apt-get insatll -y curl
+</pre>
+</div>
+<p>
+OR
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">#Just another way of Docker File
+$ vim Dockefile
+FROM ubuntu:14.04
+RUN apt-get update &amp;&amp; apt-get install -y vim \
+                                         curl
+</pre>
+</div>
+<ul class="org-ul">
+<li>The second method of dockerfile is more preferable as in first case for each run
+command an intermediate container gets created and destroyed where as in
+second method only one intermediate container will get created and destroyed</li>
+<li>Thus Second method is more preferable.</li>
+</ul></dd>
+<dt>Building a image from our Docker File</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker build -t [repository]:[tag] [path]
+</pre>
+</div>
+<ul class="org-ul">
+<li>Now you can use this image <code>[repository]:[tag]</code> to create containers</li>
+</ul>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker build -t meghanab/new_app:1.0 .
+</pre>
+</div>
+<ul class="org-ul">
+<li><code>-t</code> for specifying the image tag</li>
+<li><code>.</code> to specify the path of Dockerfile. In this case it is the current directory</li>
+</ul></dd>
+<dt>Launching a container from our new image</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker run [options] [repository]:[tag] [command]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -it -d meghanab/new_app:1.0 bash
+root@e76ccff0a41a:~#
+</pre>
+</div>
+<ul class="org-ul">
+<li>Thus a new container will be created and started with vim and curl
+pre-installed. Similarly we can install other packages.</li>
+</ul></dd>
+</dl>
+</div>
+<div id="outline-container-orgheadline24" class="outline-4">
+<h4 id="orgheadline24"><span class="section-number-4">7.2.1</span> Some more info on Dockerfile</h4>
+<div class="outline-text-4" id="text-7-2-1">
+<dl class="org-dl">
+<dt>CMD Instruction</dt><dd><ul class="org-ul">
+<li>Defines a default command that will execute when the container is
+created/started whose base image is built using dockerfile</li>
+<li>Will not perform any action when the image is being created</li>
+<li>Can only be specified once in a dockerfile</li>
+<li><p>
+Can be overriden at run time
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">FROM ubuntu:14.04
+RUN apt-get update &amp;&amp; apt-get install -y vim \
+                                   curl
+CMD ping 127.0.0.1 -c 10
+</pre>
+</div></li>
+</ul></dd>
+<dt>ENTRYPOINT instruction</dt><dd><ul class="org-ul">
+<li>Defines the command that will run when the container is executed</li>
+<li><p>
+Differnt from <code>CMD</code> instruction as <code>ENTRYPOINT</code> instruction will accept
+arguments at run time
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">ENTRYPOINT ["executable", "param1", "param2"]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">FROM ubuntu:14.04
+RUN apt-get update &amp;&amp; apt-get install -y vim \
+                                   curl
+ENTRYPOINT ["ping"]
+</pre>
+</div></li>
+<li>Only the last <code>ENTRYPOINT</code> instruction in the Dockerfile will have an effect.</li>
+<li>The <code>ENTRYPOINT</code> instruction is given in exec form which will take
+parameters in json format as it has to accept args at run time</li>
+<li><code>CMD</code> instruction can also be given in exec format</li>
+<li><p>
+You can give only one command in the <code>ENTRYPOINT</code> instruction
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run &lt;repository&gt;:&lt;tag&gt; 127.0.0.1
+</pre>
+</div></li>
+</ul></dd>
+<dt>EXPOSE instruction</dt><dd><p>
+    The <code>EXPOSE</code> command is used to associate a specified port to enable networking
+between the running process inside the container and the outside world
+(i.e. the host).
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command"># Usage: EXPOSE [port]
+EXPOSE 8080EXPOSE
+</pre>
+</div></dd>
+<dt>ADD instruction</dt><dd><p>
+    The <code>ADD</code> instruction copies new files, directories or remote file URLs
+from &lt;src&gt; and adds them to the filesystem of the container at the path
+&lt;dest&gt;.
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ ADD &lt;src&gt;... &lt;dest&gt;
+      OR   
+$ ADD ["&lt;src&gt;",... "&lt;dest&gt;"] (this form is required for paths containing whitespace)
+</pre>
+</div></dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline27" class="outline-3">
+<h3 id="orgheadline27"><span class="section-number-3">7.3</span> Run a container as a server</h3>
+<div class="outline-text-3" id="text-7-3">
+<ul class="org-ul">
+<li>We can run a container as long as you don't kill the process with PID 1</li>
+<li>If a process with PID 1 is killed inside a container then the container will
+automatically stop.</li>
+<li>In the <code>docker run [options] [image] [command]</code>, the command which you give
+will become the process with PID 1</li>
+<li>If we give "bash" as command then the container will not stop until we
+manually kill bash process in that container.</li>
+</ul>
+</div>
+<div id="outline-container-orgheadline26" class="outline-4">
+<h4 id="orgheadline26"><span class="section-number-4">7.3.1</span> Steps to set up a container as a server</h4>
+<div class="outline-text-4" id="text-7-3-1">
+<dl class="org-dl">
+<dt>Create and run a container</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker run [options] [image] [command]
+</pre>
+</div>
+<ul class="org-ul">
+<li>So let us give bash command</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -i -t ubuntu:14.04 bash
+</pre>
+</div>
+<ul class="org-ul">
+<li>This command will create a new container and will take us inside the
+container</li>
+<li>Now if you fire <code>ps -ax</code> you can see the bash process with PID 1</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-command">PID TTY      STAT   TIME COMMAND
+  1 ?        Ss+    0:00 bash
+ 51 ?        R+     0:00 ps -ax
+</pre>
+</div>
+<ul class="org-ul">
+<li>So now if you fire <code>exit</code> you will kill the process bash and you will come out of the container and the
+container stops, which is not desired.</li>
+</ul></dd>
+<dt>If you want to come out of the container and keep it running in background,then fire</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">CTRL+P+Q
+</pre>
+</div></dd>
+<dt>(no term)</dt><dd>If the host system is rebooted then this container is stopped. So to avoid
+this we have to give <code>--restart=always</code> flag at the time of creating
+container. This is discussed above in the 'Auto restart containers' section.</dd>
+</dl>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline28" class="outline-3">
+<h3 id="orgheadline28"><span class="section-number-3">7.4</span> To view the Docker containers resource usage statistics</h3>
+<div class="outline-text-3" id="text-7-4">
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker stats --no-stream=true
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker stats --no-stream=true
+CONTAINER           CPU %               MEM USAGE / LIMIT     MEM %               NET I/O             BLOCK I/O           PIDS
+07c5614d5a40        0.00%               544.8 kB / 4.064 GB   0.01%               5.245 kB / 648 B    0 B / 0 B           0
+e76ccff0a41a        0.00%               532.5 kB / 4.064 GB   0.01%               6.214 kB / 648 B    0 B / 0 B           0
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline35" class="outline-3">
+<h3 id="orgheadline35"><span class="section-number-3">7.5</span> Docker Data Volumes</h3>
+<div class="outline-text-3" id="text-7-5">
+<ul class="org-ul">
+<li>Data volumes are designed to persist data.</li>
+<li>These are independent of the container's life cycle i.e even though
+containers are deleted volumes persist.</li>
+<li>Volumes are initialized when a container is created.</li>
+<li>Data volumes can be shared and reused among containers.</li>
+<li>Changes to a data volume will not be included when you update an image.</li>
+</ul>
+
+<div class="figure">
+<p><img src="./images/volumes.png" alt="volumes.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline29" class="outline-4">
+<h4 id="orgheadline29"><span class="section-number-4">7.5.1</span> Create Volume</h4>
+<div class="outline-text-4" id="text-7-5-1">
+<ul class="org-ul">
+<li><p>
+To create a new volume
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker volume create [OPTIONS]
+</pre>
+</div>
+<ul class="org-ul">
+<li>You can create a volume and then configure the container to use it.</li>
+</ul>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker volume create --name hello
+$ docker run -d -v hello:/world &lt;image&gt; &lt;command&gt;
+</pre>
+</div>
+<ul class="org-ul">
+<li>Here the mount is created inside the container's /world directory.</li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline30" class="outline-4">
+<h4 id="orgheadline30"><span class="section-number-4">7.5.2</span> Mount Host Directory</h4>
+<div class="outline-text-4" id="text-7-5-2">
+<p>
+To mount a directory from host to your container
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run [options] -v /&lt;host_dir&gt;:/&lt;container_dir&gt; [image] [command]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -it -v /home/meghana/project:/test ubuntu:14.04 bash
+</pre>
+</div>
+<ul class="org-ul">
+<li>This command mounts the host directory, /home/meghana/project, into the
+container at /test</li>
+<li>All the files in /home/meghana/project can accessed from /test inside the
+container</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline31" class="outline-4">
+<h4 id="orgheadline31"><span class="section-number-4">7.5.3</span> Inspect</h4>
+<div class="outline-text-4" id="text-7-5-3">
+<ul class="org-ul">
+<li><p>
+To get information about one or more volumes
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker volume inspect [OPTIONS] VOLUME [VOLUME...]
+</pre>
+</div>
+<p>
+For example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker volume create --name volume_1
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-command">docker volume inspect volume_1
+[
+   {
+      "Name": "volume_1",
+      "Driver": "local",
+      "Mountpoint": "/var/lib/docker/volumes/volume_1/_data",
+      "Labels": {}
+   }
+]
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline32" class="outline-4">
+<h4 id="orgheadline32"><span class="section-number-4">7.5.4</span> Delete Volume</h4>
+<div class="outline-text-4" id="text-7-5-4">
+<ul class="org-ul">
+<li><p>
+To delete one or more volumes
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker volume rm [OPTIONS] VOLUME [VOLUME...]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker volume rm volume_1
+volume_1
+</pre>
+</div></li>
+<li>You cannot remove a volume which is currently used by a container.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline33" class="outline-4">
+<h4 id="orgheadline33"><span class="section-number-4">7.5.5</span> List Volumes</h4>
+<div class="outline-text-4" id="text-7-5-5">
+<ul class="org-ul">
+<li><p>
+To list all the volumes present
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker volume ls [OPTIONS]
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker volume ls
+DRIVER              VOLUME NAME
+local               volume_1
+local               volume_2
+</pre>
+</div></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline34" class="outline-4">
+<h4 id="orgheadline34"><span class="section-number-4">7.5.6</span> Note:</h4>
+<div class="outline-text-4" id="text-7-5-6">
+<ul class="org-ul">
+<li>We cannot add or copy a file of memory more than the free memory
+available in a container</li>
+<li>We can check free memory inside a container as follows:</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker exec &lt;container ID&gt; df -h
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker exec ec164228902a df -h
+Filesystem      Size  Used Avail Use% Mounted on
+none             37G   28G  7.2G  80% /
+tmpfs           1.9G     0  1.9G   0% /dev
+tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+/dev/sda9        37G   28G  7.2G  80% /etc/hosts
+shm              64M     0   64M   0% /dev/shm
+</pre>
+</div>
+<ul class="org-ul">
+<li>According to this we cannot copy a file of more than 7.2G into the
+container.</li>
+<li>But you can access that file from your machine by using the 'Mount host
+directory' feature of Docker data volumes.</li>
+<li>Save the file in your some where in your host directory and mount that as
+mentioned in the above section(Mount Host Directory).</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline38" class="outline-3">
+<h3 id="orgheadline38"><span class="section-number-3">7.6</span> Taking backup of Docker Containers and images</h3>
+<div class="outline-text-3" id="text-7-6">
+</div><div id="outline-container-orgheadline36" class="outline-4">
+<h4 id="orgheadline36"><span class="section-number-4">7.6.1</span> Backup Docker Images</h4>
+<div class="outline-text-4" id="text-7-6-1">
+<dl class="org-dl">
+<dt>Save the Docker Image</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker save -o &lt;name_of_backup.tar&gt; &lt;image&gt;
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker save -o bkb_image1.tar image1
+</pre>
+</div>
+<ul class="org-ul">
+<li>This tar file will be stored in your current directory.</li>
+<li>Thus you can save your images and backup them.</li>
+</ul></dd>
+<dt>Load the backup image</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker load -i &lt;name_of_backup.tar&gt;
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker load -i bkb_image1.tarx
+</pre>
+</div>
+<ul class="org-ul">
+<li>If you run <code>docker images</code> you can see your image</li>
+</ul></dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgheadline37" class="outline-4">
+<h4 id="orgheadline37"><span class="section-number-4">7.6.2</span> Backup Docker Containers</h4>
+<div class="outline-text-4" id="text-7-6-2">
+<dl class="org-dl">
+<dt>Export docker containers</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker export -o &lt;backup_file_name.tar&gt; &lt;container ID&gt;
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker export -o bkb_cntd1.tar 07c5614d5a40
+</pre>
+</div>
+<ul class="org-ul">
+<li>Exports the contents of a container's filesystem as a tar archive.</li>
+<li>The <code>docker export</code> command does not export the contents of volumes
+associated with the container.</li>
+</ul></dd>
+<dt>Import docker containers</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker import &lt;backup_file_name.tar&gt;
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker import bkb_cntd1.tar
+</pre>
+</div>
+<ul class="org-ul">
+<li>This command will create a new image and then using that image you have
+to create your container.</li>
+</ul></dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline46" class="outline-2">
+<h2 id="orgheadline46"><span class="section-number-2">8</span> Docker Hub</h2>
+<div class="outline-text-2" id="text-8">
+</div><div id="outline-container-orgheadline40" class="outline-3">
+<h3 id="orgheadline40"><span class="section-number-3">8.1</span> what is a Docker hub?</h3>
+<div class="outline-text-3" id="text-8-1">
+<p>
+The Docker Hub is a public registry maintained by Docker, Inc. It contains
+images you can download and use to build containers. It also provides
+authentication, work group structure, workflow tools like webhooks and build
+triggers, and privacy tools like private repositories for storing images you
+don't want to share publicly.
+You can refer <a href="https://docs.docker.com/docker-hub/">here</a>
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline45" class="outline-3">
+<h3 id="orgheadline45"><span class="section-number-3">8.2</span> How to use Docker hub?</h3>
+<div class="outline-text-3" id="text-8-2">
+</div><div id="outline-container-orgheadline41" class="outline-4">
+<h4 id="orgheadline41"><span class="section-number-4">8.2.1</span> Account creation and login</h4>
+<div class="outline-text-4" id="text-8-2-1">
+<ul class="org-ul">
+<li>create a Docker ID(You can do this through  <a href="https://hub.docker.com/">Docker Hub</a>)</li>
+<li>Once you have a Docker ID, log into your account from the command line</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker login
+Login with your Docker ID to push and pull images from Docker Hub. If you don't have a Docker ID, head over to https://hub.docker.com to create one.
+Username: 
+Password: 
+Login Succeeded
+</pre>
+</div>
+<ul class="org-ul">
+<li>Once you have logged in from the command line, you can commit and push to
+interact with your repos on Docker Hub.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgheadline42" class="outline-4">
+<h4 id="orgheadline42"><span class="section-number-4">8.2.2</span> Search for images</h4>
+<div class="outline-text-4" id="text-8-2-2">
+<p>
+You can search the Docker Hub registry via its search interface or by using the
+command line interface:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker search [image]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker search ubuntu:14.04
+NAME                                            DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+chef/ubuntu-14.04                               An Ubuntu 14.04 Docker Image with Chef Con...   19                   
+saltstack/ubuntu-14.04-minimal                                                                  7                    [OK]
+saltstack/ubuntu-14.04                                                                          5                    [OK]
+brook/ubuntu-14.04.3-baidupcs                   https://github.com/GangZhuo/BaiduPCS ...        3                    [OK]
+breezeight/test-kitchen-ubuntu-14.04            Ubunti 14.04 with chef omnibus installed        1                    [OK]
+simphonyproject/ubuntu-14.04-remote             Ubuntu 14.04 with Remote Access Support         1                    [OK]
+fernandoacorreia/ubuntu-14.04-oracle-java-1.7   Docker image with Ubuntu 14.04 and Oracle ...   1                    [OK]
+mostalive/ubuntu-14.04-oracle-jdk8                                                              1                    [OK]
+linuxmalaysia/docker-ubuntu-14.04-harden        Docker Ubuntu harden for security with SSH...   1                    [OK]
+visualjeff/ubuntu-14.04                                                                         0                    [OK]
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline43" class="outline-4">
+<h4 id="orgheadline43"><span class="section-number-4">8.2.3</span> Pull images</h4>
+<div class="outline-text-4" id="text-8-2-3">
+<p>
+Once you've found the image you want, you can download it with <code>docker pull</code>
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker pull [image]:[tag]
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker pull ubuntu:14.04 
+14.04: Pulling from library/ubuntu
+56eb14001ceb: Pulling fs layer 
+7ff49c327d83: Downloading [========================&gt;                          ] 49.15 kB/101.4 kB
+6e532f87f96d: Download complete 
+3ce63537e70c: Pulling fs layer
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline44" class="outline-4">
+<h4 id="orgheadline44"><span class="section-number-4">8.2.4</span> Push images</h4>
+<div class="outline-text-4" id="text-8-2-4">
+<p>
+In order to push an image in your docker hub the name of the image
+should be same as that of the repository in your docker hub account. 
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker push yourname/newimage:tag
+</pre>
+</div>
+<p>
+For Example:
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker push meghanab/myapp:1.0
+</pre>
+</div>
+<p>
+The image will then be uploaded and available for use by your team-mates and/or
+the community.You can also make the repository private.
+For more info refer this <a href="https://docs.docker.com/engine/userguide/containers/dockerrepos/">link</a>
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-orgheadline52" class="outline-2">
+<h2 id="orgheadline52"><span class="section-number-2">9</span> Performance Testing</h2>
+<div class="outline-text-2" id="text-9">
+<ul class="org-ul">
+<li>We tried to analyse the performance of Docker containers by giving load on
+197 Docker containers(each container deployed with one lab) using the
+following methods:</li>
+</ul>
+</div>
+<div id="outline-container-orgheadline47" class="outline-3">
+<h3 id="orgheadline47"><span class="section-number-3">9.1</span> Test using curl command and crontab</h3>
+<div class="outline-text-3" id="text-9-1">
+<p>
+Curl is a tool to transfer data from or to a server, using one of the
+protocol HTTP, HTTPS out of many supported protocols. Using this feature of
+curl command, we tried generating load on containers. Here are the steps -
+</p>
+<dl class="org-dl">
+<dt>Write a script to send 10000 curl request to a container</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">root@vlead-pc:~/load-scripts# vim load-test-script.sh
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-command">#!/bin/sh
+
+echo "START TEST : `date`"
+a=0
+count=0
+while [ $a -lt 10000 ]
+do
+      curl http://$1
+      a=`expr $a + 1`
+      count=`expr $count + 1`
+done
+</pre>
+</div></dd>
+<dt>Write a script to generate crontab entries for executing load-testing script for all containers</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">root@vlead-pc:~/load-scripts# vim create-crontab.sh
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-command">#!/bin/sh
+
+a=2
+ip="172.17.0."
+file="&gt;/root/load-scripts/data"
+while [ $a -lt 200 ]
+do
+    echo  $1 $2 $ip$a $file$a
+    a=`expr $a + 1`
+done
+</pre>
+</div></dd>
+<dt>Copy paste the ouput of above script in crontab</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ crontab -e
+</pre>
+</div></dd>
+<dt>Write a script to check the <code>docker stats</code></dt><dd><div class="org-src-container">
+
+<pre class="src src-command">root@vlead-pc:~/load-scripts# cat get-stat.sh
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-command">#!/bin/sh
+
+a=0
+while [ $a -lt 100 ]
+do
+     echo "`docker stats --no-stream=true`"
+     a=1
+     echo ""
+done
+</pre>
+</div></dd>
+<dt>Write a script to analyse output of docker stats</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">#!/bin/sh
+
+cat $1 | awk '{print $2}' | sed 's/%//g' | sed '/CPU/d' | sed '/^$/d' &gt; ouput.txt
+split -l 197 ouput.txt
+for i in `find x*`
+do
+    echo "`awk '{ sum += $1 } END { print sum }' $i`"
+done
+</pre>
+</div></dd>
+<dt>Following graphs were obtained</dt><dd><img src="./images/CPU-utilization-bar-graph.png" alt="CPU-utilization-bar-graph.png" />
+   <img src="./images/CPU-utilizaton-line-graph.png" alt="CPU-utilizaton-line-graph.png" />
+   <img src="./images/memory-utilization-bar-graph.png" alt="memory-utilization-bar-graph.png" />
+   <img src="./images/memory-utilization-line-graph.png" alt="memory-utilization-line-graph.png" /></dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgheadline48" class="outline-3">
+<h3 id="orgheadline48"><span class="section-number-3">9.2</span> Test using siege and sar commands</h3>
+<div class="outline-text-3" id="text-9-2">
+<ul class="org-ul">
+<li>Siege is an HTTP load testing and benchmarking utility that can be used to
+measure the performance of a web server when under duress. It evaluates the
+amount of data transferred, response time of the server, transaction rate,
+throughput, concurrency, and times the program returned okay</li>
+<li>sar command is used to collect, report, or save system activity information.</li>
+<li>Using the <code>siege</code> command we tried to generate load on the
+containers.Following are the steps:</li>
+</ul>
+<dl class="org-dl">
+<dt>Install sar,siege and configure them</dt><dd><ul class="org-ul">
+<li>To install sar refer <a href="http://www.vishalvyas.com/2012/05/installing-system-activity-reporter-sar.html">here</a>.</li>
+<li>To install siege refer <a href="https://www.linode.com/docs/tools-reference/tools/load-testing-with-siege">here</a>.</li>
+</ul></dd>
+<dt>Use sar command to get the memory(RAM) usage statistics when the Containes are</dt><dd><ul class="org-ul">
+<li>Stopped</li>
+<li>Started</li>
+<li>Containers were running</li>
+<li>Apache is started in containers</li>
+<li>Apache is running in containers</li>
+</ul>
+<div class="org-src-container">
+
+<pre class="src src-command">$ sar -r 5 10
+</pre>
+</div>
+<ul class="org-ul">
+<li>Redirect the output to a file in each case</li>
+</ul></dd>
+<dt>Write a script to generate siege commands</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">root@vlead-pc:~/load-scripts# vim generate-siege-file.sh
+</pre>
+</div>
+<div class="org-src-container">
+
+<pre class="src src-command">#!/bin/sh
+
+a=2
+while [ $a -lt 200 ]
+do
+   echo "siege -c $1 -t $2s http://172.17.0.$a &amp;"
+   echo 'echo "SEIGE CONTAINER $a"'
+   a=`expr $a + 1`
+done
+</pre>
+</div>
+<ul class="org-ul">
+<li>Running this script will generate siege commands for all the containers</li>
+</ul></dd>
+<dt>Copy these siege commands to siege-test.sh</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ sh generate-siege-file.sh [no. of users] [Total time] &gt; siege-test.sh
+</pre>
+</div></dd>
+<dt>(no term)</dt><dd>Run <code>sar -r [time interval] [no of times]</code> and <code>sh siege-test.sh</code>
+  parallely and redirect the output of <code>sar</code> command to output file</dd>
+<dt>(no term)</dt><dd>Change the values of 'no of users' and 'total time' and repeat above for
+each set of values and redirect the output of <code>sar</code> command to output file</dd>
+<dt>(no term)</dt><dd><p>
+Take the values of 'Time' and '%mem used' from output file and depict
+graphs. You can view the data <a href="./sar-test.html">here</a>
+</p>
+
+<p>
+The following graphs were obtained:
+<img src="./images/memory-usage-time-bar-graph.png" alt="memory-usage-time-bar-graph.png" />
+<img src="./images/memory-usage-time-line-graph.png" alt="memory-usage-time-line-graph.png" />
+<img src="./images/memory-usage-container-status-bar-graph.png" alt="memory-usage-container-status-bar-graph.png" />
+</p></dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgheadline51" class="outline-3">
+<h3 id="orgheadline51"><span class="section-number-3">9.3</span> Test using Fork bomb</h3>
+<div class="outline-text-3" id="text-9-3">
+<p>
+A fork bomb is a denial-of-service attack wherein a process continually
+replicates itself to deplete available system resources, slowing down or
+crashing the system due to resource starvation.
+</p>
+<ul class="org-ul">
+<li><code>:(){ :|: &amp; };:</code>  This is fork bomb.</li>
+<li>Due to this command you will run out of system resources and you may need
+to reboot your system.</li>
+<li>Here we tried to run fork bomb in one of the containers</li>
+</ul>
+</div>
+<div id="outline-container-orgheadline49" class="outline-4">
+<h4 id="orgheadline49"><span class="section-number-4">9.3.1</span> Testing Docker Container without limiting its memory</h4>
+<div class="outline-text-4" id="text-9-3-1">
+<dl class="org-dl">
+<dt>Create and run a container</dt><dd><div class="org-src-container">
+
+<pre class="src src-command">$ docker run -it ubuntu:14.04 bash
+root@ec164228902a:~# =:(){ :|: &amp; };:
+</pre>
+</div>
+<ul class="org-ul">
+<li>This container now will ask for more system resources from host
+until you run of system resources.</li>
+</ul></dd>
+<dt>(no term)</dt><dd>Since we ran out of resources, the host machine goes down and need to
+be rebooted</dd>
+<dt>(no term)</dt><dd>Thus we found out that the Docker container asks for system
+resources from host when ever required without any limit.
+Due to this if the container goes down it will crash the host.</dd>
+<dt>(no term)</dt><dd>So we have to limit the memory usage of the container.</dd>
+</dl>
+</div>
+</div>
+<div id="outline-container-orgheadline50" class="outline-4">
+<h4 id="orgheadline50"><span class="section-number-4">9.3.2</span> Testing Docker container after limiting its memory</h4>
+<div class="outline-text-4" id="text-9-3-2">
+<ul class="org-ul">
+<li><p>
+Create and run a container(include memory limit)
+</p>
+<div class="org-src-container">
+
+<pre class="src src-command">$ docker run -it -m=200M ubuntu:14.04
+root@ae164798902a:~# =:(){ :|: &amp; };
+</pre>
+</div></li>
+<li>This container will use memory of 200 MB only. If it asks for more than
+200 MB then the container stop.</li>
+<li>To start the container again you have to use <code>docker start</code> command and
+the container will start normally.</li>
+<li>Thus by limiting memory of a container, if any container crashes the
+others will be still running normally</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgheadline53" class="outline-2">
+<h2 id="orgheadline53"><span class="section-number-2">10</span> Conclusion</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+With our understanding on docker, there are more features of our interest and limitations are rare. Docker looks a good option to containerize current VM based architecture, reducing the cost to half and stabilizing it with increased scalability. 
+</p>
+</div>
+</div>
+<div id="outline-container-orgheadline54" class="outline-2">
+<h2 id="orgheadline54"><span class="section-number-2">11</span> Reference</h2>
+<div class="outline-text-2" id="text-11">
+<ul class="org-ul">
+<li>Docker Tutorials -  <a href="https://training.docker.com/self-paced-training">https://training.docker.com/self-paced-training</a></li>
+<li>Benefits of Docker - <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.0_Release_Notes/sect-Red_Hat_Enterprise_Linux-7.0_Release_Notes-Linux_Containers_with_Docker_Format-Advantages_of_Using_Docker.html">https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/7.0_Release_Notes/sect-Red_Hat_Enterprise_Linux-7.0_Release_Notes-Linux_Containers_with_Docker_Format-Advantages_of_Using_Docker.html</a></li>
+<li>Docker Architecture - <a href="https://docs.docker.com/v1.8/introduction/understanding-docker/">https://docs.docker.com/v1.8/introduction/understanding-docker/</a></li>
+<li>Install Docker - <a href="https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-getting-started">https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-getting-started</a></li>
+<li>Docker glossary -  <a href="https://docs.docker.com/engine/reference/glossary/#union-file-system">https://docs.docker.com/engine/reference/glossary/#union-file-system</a></li>
+<li>Docker Commands - <a href="https://docs.docker.com/engine/reference/commandline/">https://docs.docker.com/engine/reference/commandline/</a></li>
+<li>Docker file reference - <a href="https://docs.docker.com/engine/reference/builder/">https://docs.docker.com/engine/reference/builder/</a></li>
+<li>Docker Data Volumes - <a href="https://docs.docker.com/engine/tutorials/dockervolumes/">https://docs.docker.com/engine/tutorials/dockervolumes/</a></li>
+
+<li>Fork bomb -
+<a href="http://askubuntu.com/questions/159491/why-did-the-command-make-my-system-lag-so-badly-i-had-to-reboot">http://askubuntu.com/questions/159491/why-did-the-command-make-my-system-lag-so-badly-i-had-to-reboot</a></li>
+<li>Crontab - <a href="http://www.adminschoice.com/crontab-quick-reference">http://www.adminschoice.com/crontab-quick-reference</a></li>
+<li>curl command - <a href="https://curl.haxx.se/docs/manpage.html">https://curl.haxx.se/docs/manpage.html</a></li>
+<li>Load testing with siege -
+<a href="https://www.linode.com/docs/tools-reference/tools/load-testing-with-siege">https://www.linode.com/docs/tools-reference/tools/load-testing-with-siege</a></li>
+<li>Docker forum group - <a href="https://groups.google.com/forum/#!forum/docker-user">https://groups.google.com/forum/#!forum/docker-user</a></li>
+<li>Docker community forums - <a href="https://forums.docker.com/">https://forums.docker.com/</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: June 9, 2016</p>
+<p class="author">Author: Meghana Bandaru</p>
+<p class="date">Created: 2016-07-01 Fri 10:22</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
